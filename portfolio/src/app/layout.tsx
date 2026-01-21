@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import GlobalLoader from "@/components/GlobalLoader";
+import LayoutWrapper from "@/components/LayoutWrapper";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,12 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body>
-        <GlobalLoader />
-        <Navbar />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <LayoutWrapper>
+          <Navbar />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </LayoutWrapper>
       </body>
     </html>
   );

@@ -89,7 +89,7 @@ export default function Home() {
                           {/* Staggered Tech Tags handled in CSS via nth-child delays */}
                           <div className={styles.techStack}>
                             {project.techStack?.slice(0, 3).map((tech) => (
-                               <span key={tech} className={styles.techTag}>{tech}</span>
+                              <span key={tech} className={styles.techTag}>{tech}</span>
                             ))}
                           </div>
                         {project.githubUrl && (
