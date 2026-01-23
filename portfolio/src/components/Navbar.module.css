@@ -78,6 +78,50 @@
   border-radius: 2px;
 }
 
+/* Navbar CTA Button */
+.ctaItem {
+  margin-left: 1rem;
+}
+
+.navCTA {
+  background: var(--accent);
+  color: #0F0F0F;
+  padding: 0.65rem 1.75rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.navCTA::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.navCTA:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.navCTA:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(253, 141, 103, 0.4);
+}
+
 @media (max-width: 768px) {
   .nav {
     padding: 0 1.5rem;

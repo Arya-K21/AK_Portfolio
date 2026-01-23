@@ -80,6 +80,12 @@ const Navbar = () => {
             </li>
           );
         })}
+        {/* CTA Button */}
+        <li className={styles.ctaItem}>
+          <Link href="/#contact" className={styles.navCTA}>
+            Hire Me
+          </Link>
+        </li>
       </ul>
     </nav>
   );

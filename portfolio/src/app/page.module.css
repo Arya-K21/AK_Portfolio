@@ -88,24 +88,61 @@
 /* Text Styles inside the Glass Board */
 .name {
   font-family: var(--font-outfit);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--accent);
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
   font-weight: 600;
   display: inline-block;
   text-shadow: 0 0 20px rgba(253, 141, 103, 0.4);
+  opacity: 0.9;
+}
+
+.roleTag {
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.75rem;
+  text-transform: uppercase;
+  display: inline-block;
 }
 
 .title {
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem); /* Slightly smaller per request */
-  line-height: 1.2;
-  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  line-height: 1.25;
+  font-weight: 600;
   color: #fff;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
-  max-width: 800px;
+  max-width: 700px;
+}
+
+.subheading {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.subheading strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.credibilityLine {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--accent);
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+  font-weight: 00;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
 }
 
 .description {
@@ -122,7 +159,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     height: auto;
-    padding: 2rem;
+    padding: 4rem;
     gap: 1rem;
   }
   
@@ -146,10 +183,63 @@
   }
 }
 
+/* Mobile Hero Responsive */
+@media (max-width: 768px) {
+  .heroContent {
+    padding: 0 2rem;
+    padding-top: 12vh;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+  }
+  
+  .subheading {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .roleTag {
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .heroCTA {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .primaryCTA, .secondaryCTA {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+  
+  /* Hide profile photo on mobile to prevent overlap */
+  .rightFeature {
+    display: none;
+  }
+}
+
+/* Tablet responsive - also hide photo */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .rightFeature {
+    display: none;
+  }
+  
+  .heroContent {
+    padding: 0 3rem;
+    padding-top: 15vh;
+  }
+}
+
 /* ABOUT SECTION */
 .aboutSection {
-  padding: 6rem 2rem 2rem; /* Reduced bottom padding significantly */
-  max-width: 1000px; /* Increased to accommodate grid */
+  padding: 5rem 2rem 2rem;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
 }
@@ -161,16 +251,15 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-secondary);
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .sectionHeading {
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 2rem;
-  line-height: 1.3;
+  margin-bottom: 1.75rem;
+  line-height: 1.4;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -178,21 +267,26 @@
 
 .connectiveLine {
   width: 1px;
-  height: 60px; /* Reduced length from 100px */
+  height: 60px;
   background: var(--border-subtle);
-  margin: 1rem auto; /* Reduced margin from 2rem */
+  margin: 1rem auto;
   display: block;
 }
 
 .aboutText {
-  font-size: 1.25rem;
-  line-height: 1.6;
+  font-size: 1.125rem;
+  line-height: 1.5;
   color: var(--text-secondary);
   font-weight: 400;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.aboutText strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .aboutHighlight {
@@ -456,6 +550,7 @@
   /* Truncate */
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -547,16 +642,16 @@
 /* RIGHT SIDE FEATURE - PROMINENT PHOTO STAGE */
 .rightFeature {
   position: absolute;
-  top: calc(50% - 180px); /* Moved up by 120px */
-  right: -150px; /* Offset to show ~70% on screen */
+  top: calc(50% - 200px); /* Aligned with headline */
+  right: -80px; /* Moved closer to content */
   transform: translateY(-50%);
-  width: 700px; /* Much larger */
-  height: 95vh; /* Nearly full height */
-  border-radius: 500px 0 0 500px; /* Larger radius for smoother curve */
+  width: 700px;
+  height: 95vh;
+  border-radius: 500px 0 0 500px;
   
-  /* Clean - no colored backgrounds */
+  /* Clean blob background - no circular rings */
   background: transparent;
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   
@@ -564,6 +659,18 @@
   pointer-events: none;
   overflow: hidden;
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+  
+  /* Subtle breathing animation on opacity only */
+  animation: breatheGlow 12s ease-in-out infinite;
+}
+
+@keyframes breatheGlow {
+  0%, 100% { 
+    opacity: 1;
+  }
+  50% { 
+    opacity: 0.9;
+  }
 }
 
 .featurePlaceholder {
@@ -571,19 +678,34 @@
   height: 100%;
   background: transparent;
   display: flex;
-  align-items: flex-start; /* Align to top instead of center */
+  align-items: flex-start;
   justify-content: center;
-  padding-top: 8vh; /* Position higher on screen */
-  padding-left: 2rem;
+  padding-top: 6vh; /* Adjusted to align eyes with headline */
+  padding-left: 1rem; /* Reduced to move photo left */
   padding-right: 4rem;
+  
+  /* Fade-in animation on load - delayed for sequential reveal */
+  animation: photoFadeIn 700ms ease-out 400ms forwards;
+  opacity: 0;
+}
+
+@keyframes photoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* PROFILE PHOTO - NATURAL FLOATING */
 .profilePhoto {
-  width: 420px !important;
-  height: 420px !important;
+  width: 410px !important; /* Increased by 17% from 350px */
+  height: 410px !important;
   object-fit: cover;
-  object-position: center top; /* Focus on face/upper body */
+  object-position: center 20%; /* Align eyes with headline */
   
   /* Clean circular frame */
   border-radius: 50%;
@@ -591,11 +713,13 @@
   /* No border - clean edge */
   border: none;
   
-  /* Minimal glow - no heavy shadows */
+  /* Sophisticated shadow system */
   box-shadow: 
-    /* Very subtle outer glow only */
+    /* Subtle inner shadow for depth */
+    inset 0 0 12px rgba(60, 20, 20, 0.1),
+    /* Outer glow */
     0 0 40px rgba(255, 255, 255, 0.1),
-    /* Light depth shadow - much softer */
+    /* Depth shadow */
     0 10px 30px rgba(0, 0, 0, 0.2);
   
   /* Smooth transitions */
@@ -607,81 +731,103 @@
   
   /* Subtle brightness boost */
   filter: brightness(1.05) contrast(1.05);
+  
+  /* Subtle float animation - slower, more elegant */
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
 
 /* Enhanced hover effect */
 .profilePhoto:hover {
-  transform: scale(1.03);
+  transform: scale(1.03) translateY(-5px);
   filter: brightness(1.08) contrast(1.08);
   box-shadow: 
+    inset 0 0 12px rgba(60, 20, 20, 0.12),
     0 0 50px rgba(255, 255, 255, 0.15),
     0 15px 40px rgba(0, 0, 0, 0.25);
+  animation-play-state: paused;
 }
 
-/* SKILLS CAROUSEL - ENHANCED WITH EFFECTS */
-.skillsCarouselWrapper {
-  position: relative;
-  height: 80px; /* Taller for larger text */
-  width: 100%; /* Full width of left column */
-  max-width: 600px; /* Constrain width */
+/* HERO CTA BUTTONS */
+.heroCTA {
   display: flex;
-  justify-content: flex-start; /* Left align */
+  gap: 1.25rem;
   align-items: center;
-  margin-top: 2.5rem;
-  overflow: visible; /* Allow glow to show */
+  margin-top: 2rem;
 }
 
-/* Left-side blur/fade mask */
-.skillsCarouselWrapper::before {
+.primaryCTA {
+  background: var(--accent);
+  color: #0F0F0F;
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-inter);
+}
+
+.primaryCTA::before {
   content: '';
   position: absolute;
-  left: -20px;
-  top: 0;
-  width: 100px;
-  height: 100%;
-  background: linear-gradient(to right, var(--bg-primary), transparent);
-  pointer-events: none;
-  z-index: 10;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
 }
 
-/* Animated underline that appears with each skill */
-.skillsCarouselWrapper::after {
-  content: '';
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 120px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  border-radius: 2px;
-  opacity: 0.6;
-  animation: underlinePulse 4s ease-in-out infinite;
+.primaryCTA:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
-@keyframes underlinePulse {
-  0%, 100% { width: 80px; opacity: 0.4; }
-  50% { width: 140px; opacity: 0.8; }
+.primaryCTA:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(253, 141, 103, 0.5), 0 10px 25px rgba(253, 141, 103, 0.2);
 }
 
-.skillItem {
-  position: absolute;
-  left: 0; /* Left aligned */
-  font-family: var(--font-outfit);
-  font-size: 1.75rem; /* Much larger */
-  font-weight: 700; /* Bolder */
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--accent);
-  white-space: nowrap;
-  line-height: 1.2;
-  
-  /* Visual effects */
-  text-shadow: 
-    0 0 30px rgba(253, 141, 103, 0.5),
-    0 0 60px rgba(253, 141, 103, 0.2);
-  
-  /* Subtle background highlight */
-  padding: 0.5rem 1.5rem 0.5rem 0;
-  background: linear-gradient(90deg, rgba(253, 141, 103, 0.08), transparent);
-  border-radius: 8px;
+.primaryCTA:active {
+  transform: translateY(0);
+}
+
+.secondaryCTA {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-inter);
+  backdrop-filter: blur(10px);
+}
+
+.secondaryCTA:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
+}
+
+.secondaryCTA:active {
+  transform: translateY(0);
 }

@@ -12,10 +12,10 @@ function PreloaderManager() {
     // Check session storage
     if (typeof window !== "undefined") {
       const hasVisited = sessionStorage.getItem("portfolio_visited");
-       // DISABLED FOR TESTING: Remove comment to enable one-time-per-session
-      // if (hasVisited) {
-      //   setLoading(false);
-      // }
+      // Only show loader if user hasn't visited in this session
+      if (hasVisited) {
+        setLoading(false);
+      }
     }
   }, [setLoading]);
 
