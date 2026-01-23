@@ -18,7 +18,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Arya K. | UI/UX Designer & Frontend Developer",
+  title: "Arya Kulkarni",
   description: "A product-driven portfolio showcasing thoughtful UI/UX design and frontend development.",
 };
 

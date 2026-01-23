@@ -42,17 +42,22 @@
   pointer-events: none;
 }
 
-/* Hero Content - sits above the glass */
+/* Content Container - LEFT ALIGNED (Split-Screen) */
 .heroContent {
   position: relative;
-  z-index: 2;
+  z-index: 20;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem 0 6rem; /* More left padding for breathing room */
+  
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 3rem 2rem;
-  min-height: 100vh;
+  justify-content: flex-start; /* Start from top */
+  align-items: flex-start; /* Left align */
+  text-align: left; /* Left text */
+  padding-top: 18vh; /* Better vertical centering */
+  min-height: 100vh; /* Full height for scroll space */
 }
 
 /* The physical glass pane */
@@ -94,13 +99,13 @@
 }
 
 .title {
-  font-size: clamp(3rem, 6vw, 5rem);
-  line-height: 1.1;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem); /* Slightly smaller per request */
+  line-height: 1.2;
   font-weight: 700;
   color: #fff;
   margin-bottom: 2.5rem;
-  letter-spacing: -0.03em;
-  max-width: 900px;
+  letter-spacing: -0.02em;
+  max-width: 800px;
 }
 
 .description {
@@ -500,8 +505,183 @@
   }
 }
 
-@media (max-width: 768px) {
-  .hero {
-    padding: 0 1.5rem;
-  }
+/* HERO SECTION */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  
+  /* Flex layout to manage the two zones */
+  display: flex;
+  flex-direction: column; /* Stacked for now, but we use absolute for dome */
+  justify-content: flex-start; /* Start from top */
+  padding-top: 120px; /* Space from navbar */
+}
+
+/* Background canvas */
+.heroCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Content Container - LEFT ALIGNED */
+.heroContent {
+  position: relative;
+  z-index: 20; /* High priority */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem; /* Horizontal gutters */
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left align everything */
+  text-align: left;
+}
+
+/* RIGHT SIDE FEATURE - PROMINENT PHOTO STAGE */
+.rightFeature {
+  position: absolute;
+  top: calc(50% - 180px); /* Moved up by 120px */
+  right: -150px; /* Offset to show ~70% on screen */
+  transform: translateY(-50%);
+  width: 700px; /* Much larger */
+  height: 95vh; /* Nearly full height */
+  border-radius: 500px 0 0 500px; /* Larger radius for smoother curve */
+  
+  /* Clean - no colored backgrounds */
+  background: transparent;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.featurePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: flex-start; /* Align to top instead of center */
+  justify-content: center;
+  padding-top: 8vh; /* Position higher on screen */
+  padding-left: 2rem;
+  padding-right: 4rem;
+}
+
+/* PROFILE PHOTO - NATURAL FLOATING */
+.profilePhoto {
+  width: 420px !important;
+  height: 420px !important;
+  object-fit: cover;
+  object-position: center top; /* Focus on face/upper body */
+  
+  /* Clean circular frame */
+  border-radius: 50%;
+  
+  /* No border - clean edge */
+  border: none;
+  
+  /* Minimal glow - no heavy shadows */
+  box-shadow: 
+    /* Very subtle outer glow only */
+    0 0 40px rgba(255, 255, 255, 0.1),
+    /* Light depth shadow - much softer */
+    0 10px 30px rgba(0, 0, 0, 0.2);
+  
+  /* Smooth transitions */
+  transition: all 0.5s ease;
+  
+  /* Ensure image renders properly */
+  position: relative;
+  z-index: 10;
+  
+  /* Subtle brightness boost */
+  filter: brightness(1.05) contrast(1.05);
+}
+
+/* Enhanced hover effect */
+.profilePhoto:hover {
+  transform: scale(1.03);
+  filter: brightness(1.08) contrast(1.08);
+  box-shadow: 
+    0 0 50px rgba(255, 255, 255, 0.15),
+    0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* SKILLS CAROUSEL - ENHANCED WITH EFFECTS */
+.skillsCarouselWrapper {
+  position: relative;
+  height: 80px; /* Taller for larger text */
+  width: 100%; /* Full width of left column */
+  max-width: 600px; /* Constrain width */
+  display: flex;
+  justify-content: flex-start; /* Left align */
+  align-items: center;
+  margin-top: 2.5rem;
+  overflow: visible; /* Allow glow to show */
+}
+
+/* Left-side blur/fade mask */
+.skillsCarouselWrapper::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(to right, var(--bg-primary), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Animated underline that appears with each skill */
+.skillsCarouselWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+  opacity: 0.6;
+  animation: underlinePulse 4s ease-in-out infinite;
+}
+
+@keyframes underlinePulse {
+  0%, 100% { width: 80px; opacity: 0.4; }
+  50% { width: 140px; opacity: 0.8; }
+}
+
+.skillItem {
+  position: absolute;
+  left: 0; /* Left aligned */
+  font-family: var(--font-outfit);
+  font-size: 1.75rem; /* Much larger */
+  font-weight: 700; /* Bolder */
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+  line-height: 1.2;
+  
+  /* Visual effects */
+  text-shadow: 
+    0 0 30px rgba(253, 141, 103, 0.5),
+    0 0 60px rgba(253, 141, 103, 0.2);
+  
+  /* Subtle background highlight */
+  padding: 0.5rem 1.5rem 0.5rem 0;
+  background: linear-gradient(90deg, rgba(253, 141, 103, 0.08), transparent);
+  border-radius: 8px;
 }

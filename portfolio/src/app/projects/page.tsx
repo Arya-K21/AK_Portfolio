@@ -91,6 +91,15 @@ export default function Projects() {
         >
           Development
         </button>
+        <button 
+          className={`${styles.domainBtn} ${projects[activeIndex].domain === 'Publications' ? styles.domainBtnActive : ''}`}
+          onClick={() => {
+            const idx = projects.findIndex(p => p.domain === 'Publications');
+            if (idx !== -1) setActiveIndex(idx);
+          }}
+        >
+          Publications
+        </button>
       </div>
 
       {/* Stacked Cards Container */}

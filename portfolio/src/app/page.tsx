@@ -7,6 +7,7 @@ import styles from "./page.module.css";
 import { projects } from "./projects/data";
 import Reveal from "../components/Reveal";
 import SpotlightHero from "../components/SpotlightHero";
+import ScrollGlass from "../components/ScrollGlass";
 
 export default function Home() {
   // Select top 1 project for home page
@@ -14,6 +15,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Scroll-reactive Glass Effect */}
+      <ScrollGlass />
+      
       {/* Main Content - Always rendered to allow anchor linking */}
       <main>
         {/* 1. LANDING HERO (ANIMATED) */}
