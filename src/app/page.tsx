@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./page.module.css";
@@ -30,7 +30,7 @@ export default function Home() {
             I design interfaces that reduce friction and scale. Every decision is rooted in user research, technical constraints, and business goals.
           </h2>
           <p className={styles.aboutText}>
-            My approach: Start with the problem, not the solution. I combine <strong>user research</strong>, <strong>systems thinking</strong>, and <strong>frontend development</strong> to build products that work for real users in real contexts. I don't just make things look good—I make them work better.
+            My approach: Start with the problem, not the solution. I combine <strong>user research</strong>, <strong>systems thinking</strong>, and <strong>frontend development</strong> to build products that work for real users in real contexts. I don&apos;t just make things look good—I make them work better.
           </p>
 
           {/* Toolkit & Skills Grid */}

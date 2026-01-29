@@ -15,7 +15,7 @@ const Footer = () => {
         {showContact && (
           <>
             <div className={styles.header}>
-              <h2 className={styles.title}>Let's Connect</h2>
+              <h2 className={styles.title}>Let&apos;s Connect</h2>
               <p className={styles.subtitle}>
                 Have a project in mind or just want to chat?
               </p>

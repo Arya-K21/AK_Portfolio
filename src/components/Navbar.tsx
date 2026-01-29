@@ -10,11 +10,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    // If we are not on home page, reset active section (or rely on pathname)
-    if (pathname !== "/") {
-      setActiveSection("");
-      return;
-    }
+    if (pathname !== "/") return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,10 +20,9 @@ const Navbar = () => {
           }
         });
       },
-      { threshold: 0, rootMargin: "-45% 0px -45% 0px" } // Trigger when section crosses center of viewport
+      { threshold: 0, rootMargin: "-45% 0px -45% 0px" },
     );
 
-    // Observe sections
     const sections = ["home", "about", "contact"];
     sections.forEach((id) => {
       const el = document.getElementById(id);
@@ -57,13 +52,13 @@ const Navbar = () => {
             // Projects is a separate page
             isActive = pathname.startsWith("/projects");
           } else if (pathname === "/") {
-             // Home page internal navigation
-             isActive = activeSection === link.id;
-             
-             // Initial load fallback: if no section is active yet and we are home, default to home
-             // This logic should be stable. However, to stay strict, let's rely on activeSection state.
-             // If activeSection is empty, nothing highlights until user scrolls or observer fires. 
-             // That is safer for hydration.
+            // Home page internal navigation
+            isActive = activeSection === link.id;
+
+            // Initial load fallback: if no section is active yet and we are home, default to home
+            // This logic should be stable. However, to stay strict, let's rely on activeSection state.
+            // If activeSection is empty, nothing highlights until user scrolls or observer fires.
+            // That is safer for hydration.
           }
 
           return (
@@ -72,7 +67,7 @@ const Navbar = () => {
                 href={link.href}
                 className={isActive ? styles.active : ""}
                 onClick={() => {
-                   if (link.id !== "projects") setActiveSection(link.id);
+                  if (link.id !== "projects") setActiveSection(link.id);
                 }}
               >
                 {link.name}

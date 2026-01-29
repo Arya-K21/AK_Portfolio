@@ -9,6 +9,13 @@ export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  // Navigation Logic
+  const nextProject = () => {
+    setActiveIndex((prev) => (prev < projects.length - 1 ? prev + 1 : prev));
+  };
+  const prevProject = () => {
+    setActiveIndex((prev) => (prev > 0 ? prev - 1 : prev));
+  };
 
   // Debounced Scroll Handler
   const handleWheel = useCallback((e: WheelEvent) => {
@@ -28,14 +35,7 @@ export default function Projects() {
     }
   }, [activeIndex]); // slightly inefficient dep, but handled by ref logic mostly
 
-  // Navigation Logic
-  const nextProject = () => {
-    setActiveIndex((prev) => (prev < projects.length - 1 ? prev + 1 : prev));
-  };
 
-  const prevProject = () => {
-    setActiveIndex((prev) => (prev > 0 ? prev - 1 : prev));
-  };
 
   useEffect(() => {
     const container = containerRef.current;
