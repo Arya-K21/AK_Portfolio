@@ -2,7 +2,7 @@
 
 Hey there! 👋 This is the repository for my personal portfolio. I built this to showcase my work across UI/UX design, frontend development, and a few full-stack projects. 
 
-You can check out the live site here: *(Deploying soon!)*
+You can check out the live site here: https://arya-kulkarni-portfolio.vercel.app/
 
 ## What's under the hood?
 
