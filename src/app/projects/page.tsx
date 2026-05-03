@@ -24,6 +24,7 @@ export default function Projects() {
   }, []);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartY = useRef(0);
   // Navigation Logic
   const nextProject = () => {
     setActiveIndex((prev) => (prev < projects.length - 1 ? prev + 1 : prev));
@@ -61,12 +62,35 @@ export default function Projects() {
 
   useEffect(() => {
     const container = containerRef.current;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      const touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchStartY.current - touchEndY;
+      
+      // Require a minimum swipe distance of 50px to trigger
+      if (Math.abs(deltaY) > 50) {
+        if (deltaY > 0) {
+          nextProject(); // Swiped up -> next
+        } else {
+          prevProject(); // Swiped down -> prev
+        }
+      }
+    };
+
     if (container) {
       container.addEventListener("wheel", handleWheel, { passive: false });
+      container.addEventListener("touchstart", handleTouchStart, { passive: true });
+      container.addEventListener("touchend", handleTouchEnd, { passive: true });
     }
     return () => {
       if (container) {
         container.removeEventListener("wheel", handleWheel);
+        container.removeEventListener("touchstart", handleTouchStart);
+        container.removeEventListener("touchend", handleTouchEnd);
       }
     };
   }, [handleWheel]);
