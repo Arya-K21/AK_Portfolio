@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import styles from "./musikko.module.css";
 
 // Screen metadata — label each screen for the case study narrative
@@ -17,12 +17,12 @@ const screens = [
   { src: "/projects/musikko/8.png", label: "Themes / Appearance", caption: "Light, Dark, Midnight, Neon Pulse, Classic — personalization as a free feature." },
 ];
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: "easeOut" },
+    transition: { delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
