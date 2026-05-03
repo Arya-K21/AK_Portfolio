@@ -20,16 +20,23 @@ body {
   font-family: var(--font-inter), sans-serif;
   
   /* Deep Cinematic Background - Boosted */
-  background-color: #08080A; /* Deepest Void */
+  background-color: #050507; /* Darker to make glow pop */
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(105, 104, 166, 0.45), transparent 45%), /* Lavender Glow */
-    radial-gradient(circle at 85% 30%, rgba(169, 38, 85, 0.4), transparent 45%); /* Velvet Glow */
+    radial-gradient(circle at 15% 50%, rgba(105, 104, 166, 0.65), transparent 50%), /* Lavender Glow */
+    radial-gradient(circle at 85% 30%, rgba(169, 38, 85, 0.55), transparent 55%); /* Velvet Glow */
   background-attachment: fixed; /* Parallax-like feel */
   
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
 /* Global Glass Blur Layer - The "Whole Website" Glass Effect */

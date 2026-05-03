@@ -18,8 +18,39 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Arya Kulkarni",
-  description: "A product-driven portfolio showcasing thoughtful UI/UX design and frontend development.",
+  title: "Arya Kulkarni | UI/UX Designer & Frontend Developer",
+  description:
+    "Portfolio of Arya Kulkarni — CS student from Pune building intuitive, premium digital products. Specializing in UI/UX design, React, Next.js, and full-stack development.",
+  keywords: [
+    "Arya Kulkarni",
+    "UI UX Designer",
+    "Frontend Developer",
+    "Next.js Portfolio",
+    "React Developer",
+    "Pune",
+    "CS Student",
+  ],
+  authors: [{ name: "Arya Kulkarni", url: "https://github.com/Arya-K21" }],
+  openGraph: {
+    title: "Arya Kulkarni | UI/UX Designer & Frontend Developer",
+    description:
+      "CS student from Pune building intuitive, premium digital products. Check out my design and development work.",
+    url: "https://arya-portfolio.vercel.app", // 🔧 Update with your actual Vercel URL after deployment
+    siteName: "Arya Kulkarni Portfolio",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arya Kulkarni | UI/UX Designer & Frontend Developer",
+    description:
+      "CS student from Pune building intuitive, premium digital products.",
+    creator: "@Arya_K216",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

@@ -5,8 +5,23 @@ import Link from "next/link";
 import { projects } from "./data";
 import styles from "./projects.module.css";
 
+const SESSION_KEY = "projects_activeIndex";
+
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Safely restore state after hydration to avoid SSR mismatch
+  useEffect(() => {
+    setIsMounted(true);
+    const saved = sessionStorage.getItem(SESSION_KEY);
+    if (saved !== null) {
+      const idx = parseInt(saved, 10);
+      if (!isNaN(idx) && idx >= 0 && idx < projects.length) {
+        setActiveIndex(idx);
+      }
+    }
+  }, []);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   // Navigation Logic
@@ -36,6 +51,13 @@ export default function Projects() {
   }, [activeIndex]); // slightly inefficient dep, but handled by ref logic mostly
 
 
+
+  // Persist active index so navigating back restores the same project
+  useEffect(() => {
+    if (isMounted) {
+      sessionStorage.setItem(SESSION_KEY, String(activeIndex));
+    }
+  }, [activeIndex, isMounted]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -120,8 +142,9 @@ export default function Projects() {
                 zIndex: 100 - index, // Layers: 0 is top
               } as React.CSSProperties}
             >
-              {/* Card Visual content - Conditional link based on domain */}
+              {/* Card Visual content - Conditional rendering based on domain + publish state */}
               {project.domain === "Publications" && project.externalUrl ? (
+                // Published paper → external link
                 <a 
                   href={project.externalUrl} 
                   target="_blank" 
@@ -151,7 +174,25 @@ export default function Projects() {
                     </div>
                   </div>
                 </a>
+              ) : project.domain === "Publications" && !project.externalUrl ? (
+                // Accepted but not yet published → clickable internal link to abstract
+                <Link href={`/projects/${project.slug}`} className={styles.cardInner}>
+                  <div className={styles.cardPreview} style={{ background: project.gradient }}>
+                    <div className={styles.pendingBadge}>✦ Accepted · Coming Soon</div>
+                  </div>
+                  <div className={styles.cardContent}>
+                    <div className={styles.cardMeta}>
+                      <span>{project.role}</span>
+                    </div>
+                    <h2 className={styles.projectTitle}>{project.title}</h2>
+                    <p className={styles.projectDesc}>{project.description}</p>
+                    <div className={styles.cardAction}>
+                      Explore Paper &rarr;
+                    </div>
+                  </div>
+                </Link>
               ) : (
+                // Design / Development project → internal case study link
                 <Link href={`/projects/${project.slug}`} className={styles.cardInner}>
                   <div className={styles.cardPreview} style={{ background: project.gradient }}>
                     <div className={styles.projectOverlay}>

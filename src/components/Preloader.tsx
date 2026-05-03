@@ -10,7 +10,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
     // Custom progress logic to match the bar visually
     const controls = animate(0, 100, {
-      duration: 6.5, // Adjusted to user preference 6.5s
+      duration: 4.0, // Adjusted to ~4 seconds
       ease: [0.22, 1, 0.36, 1], // Custom buffer easing
       onUpdate: (latest) => setProgress(Math.round(latest)),
       onComplete: () => {
@@ -32,7 +32,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
              animate={{ opacity: 1 }}
              className={styles.loadingText}
            >
-             System Initializing...
+             Loading Portfolio...
            </motion.span>
            <span className={styles.percentage}>{progress}%</span>
         </div>

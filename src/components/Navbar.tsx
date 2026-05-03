@@ -8,6 +8,15 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -40,7 +49,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ""}`}>
       <div className={styles.logo}>
         <Link href="/">Arya K.</Link>
       </div>

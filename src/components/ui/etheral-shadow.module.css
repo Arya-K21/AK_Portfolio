@@ -1,0 +1,47 @@
+.container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.titleWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  pointer-events: none; /* Ensure text doesn't block interactions if any */
+}
+
+.title {
+  font-size: 3.75rem; /* text-6xl */
+  line-height: 1;
+  font-weight: 700; /* font-bold */
+  text-align: center;
+  color: var(--text-primary, #ffffff); /* text-foreground, fallback to white */
+  position: relative;
+  z-index: 20;
+  margin: 0;
+  font-family: var(--font-outfit, sans-serif); /* Use project font */
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 4.5rem; /* md:text-7xl */
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 6rem; /* lg:text-8xl */
+  }
+}
+
+.noiseOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}

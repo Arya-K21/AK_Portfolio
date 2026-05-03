@@ -66,6 +66,13 @@ export default function ProjectDetail() {
           <span>{project.role}</span>
         </div>
 
+        {/* TECH STACK TAGS - Moved up for better hierarchy */}
+        <div className={styles.techStack} style={{ marginTop: '1rem', marginBottom: '1.5rem', justifyContent: 'center' }}>
+          {project.techStack.map((tech) => (
+            <span key={tech} className={styles.techTag}>{tech}</span>
+          ))}
+        </div>
+
         {/* PROJECT DESCRIPTION - Auto-loaded from data.ts */}
         <motion.p 
           initial={{ y: 20, opacity: 0 }}
@@ -76,12 +83,19 @@ export default function ProjectDetail() {
           {project.description}
         </motion.p>
 
-        {/* TECH STACK TAGS - Auto-loaded from data.ts */}
-        <div className={styles.techStack}>
-          {project.techStack.map((tech) => (
-            <span key={tech} className={styles.techTag}>{tech}</span>
-          ))}
-        </div>
+        {/* PROJECT ABSTRACT - Rendered if available */}
+        {project.abstract && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.25 }}
+            className={styles.abstract}
+            style={{ marginTop: '1.5rem', padding: '1.5rem', background: 'rgba(255,255,255,0.03)', borderRadius: '12px', borderLeft: '4px solid var(--accent)' }}
+          >
+            <h3 style={{ fontFamily: 'var(--font-outfit)', fontSize: '1.2rem', marginBottom: '0.75rem' }}>Abstract</h3>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '0.95rem', textAlign: 'left' }}>{project.abstract}</p>
+          </motion.div>
+        )}
         
         {/* GITHUB LINK - Only shows if githubUrl exists in data.ts */}
         {project.githubUrl && (
@@ -118,28 +132,39 @@ export default function ProjectDetail() {
           
           CURRENT: Shows 4 placeholder boxes
           ======================================== */}
-      <section>
-        <h3 style={{ fontFamily: 'var(--font-outfit)', marginBottom: '1.5rem', fontSize: '1.5rem' }}>Project Gallery</h3>
-        <div className={styles.galleryGrid}>
-          {/* 
-            TODO: Replace this placeholder array with actual images
-            Example: const images = ["/projects/fintech-dashboard/img1.png", ...]
-          */}
-          {[1, 2, 3, 4].map((i) => (
-            <motion.div 
-              key={i} 
-              className={styles.galleryItem}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-            >
-              {/* REPLACE THIS with: <img src="/projects/[slug]/image.png" alt="description" /> */}
-              <span className={styles.placeholderText}>Image Space {i}</span>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* ========================================
+          PROJECT GALLERY / IMAGES
+          (Hidden for Publications and specific projects)
+          ======================================== */}
+      {project.domain !== "Publications" && project.slug !== "space-debris-dashboard" && project.slug !== "windows-clone" && (
+        <section>
+          <h3 style={{ fontFamily: 'var(--font-outfit)', marginBottom: '1.5rem', fontSize: '1.5rem' }}>Project Gallery</h3>
+          <div className={styles.galleryGrid}>
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <motion.div 
+                key={i} 
+                className={styles.galleryItem}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <img 
+                  src={`/projects/${project.slug}/${i}.png`} 
+                  alt={`${project.title} image ${i}`} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    // Automatically hide this frame if the image doesn't exist
+                    (e.target as HTMLImageElement).parentElement!.style.display = 'none';
+                  }}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      )}
+
+
 
       {/* ========================================
           ADDITIONAL SECTIONS (OPTIONAL)

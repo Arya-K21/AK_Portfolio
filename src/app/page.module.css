@@ -326,12 +326,21 @@
 
 /* Reuse or styled .techTag if it differs from project tag */
 .techTag {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.07);
   color: #fff;
-  font-size: 0.9rem; /* Increased size */
-  padding: 0.5rem 1rem; /* Increased padding */
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
   border-radius: 100px;
   backdrop-filter: blur(4px);
+  border: 1px solid transparent;
+  cursor: default;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skillTags .techTag:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
 }
 
 /* Staggered Reveal ONLY for Project Cards */
@@ -438,6 +447,14 @@
 }
 
 /* HOME PROJECT GRID */
+.projectGridHorizontal {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px; /* Constrain the overall width so they aren't massive */
+}
+
 .projectGrid {
   width: 100%;
   display: flex;
@@ -446,9 +463,8 @@
 
 .projectCard {
   display: flex;
-  flex-direction: row; /* Side by side */
-  align-items: stretch; /* Stretch to fill height */
-  gap: 0; /* No gap, contained */
+  flex-direction: column; /* Image on top, text on bottom */
+  gap: 0;
   text-decoration: none;
   background: #0F0F0F; /* Dark card background */
   border-radius: 20px;
@@ -456,15 +472,15 @@
   box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   width: 100%;
-  max-width: 900px; /* Tighter width like project page */
-  height: 400px; /* Fixed height for consistency */
+  height: 420px; /* Taller card */
 }
 
 /* Framer motion handles hover for the card scale usually */
 
 .projectPreview {
-  flex: 1.2; /* Take up slightly more space or equal */
-  height: 100%;
+  flex: none;
+  height: 55%;
+  width: 100%;
   background-size: 200% 200%;
   background-position: center;
   position: relative;
@@ -524,17 +540,17 @@
 
 .projectInfo {
   flex: 1;
-  padding: 2.5rem;
+  padding: 1.5rem 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Push text to top of info section */
   background: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(20px);
   text-align: left;
 }
 
 .projectTitle {
-  font-size: 2rem;
+  font-size: 1.4rem; /* Adjusted for column layout */
   font-family: var(--font-outfit);
   color: var(--text-primary);
   margin-bottom: 0.5rem;
@@ -542,7 +558,7 @@
 }
 
 .projectDesc {
-  font-size: 1rem;
+  font-size: 0.9rem; /* Scaled down proportionally */
   color: var(--text-secondary);
   line-height: 1.5;
   margin-bottom: 1.5rem;
@@ -586,6 +602,10 @@
     padding: 0 2rem;
   }
   
+  .projectGridHorizontal {
+    grid-template-columns: 1fr; /* Stack vertically on smaller screens */
+  }
+  
   .sideLink {
     flex-direction: row;
     margin-top: 0;
@@ -593,10 +613,6 @@
 
   .sideLink:hover .arrowCircle {
     transform: translateX(5px);
-  }
-  
-  .projectCard {
-    max-width: 100%;
   }
 }
 
@@ -830,4 +846,176 @@
 
 .secondaryCTA:active {
   transform: translateY(0);
+}
+
+/* ============================================
+   TYPEWRITER EFFECT
+============================================ */
+.typewriterRow {
+  margin-bottom: 1.25rem;
+}
+
+.typewriter {
+  font-family: var(--font-outfit);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.cursor {
+  display: inline-block;
+  color: var(--accent);
+  margin-left: 2px;
+  animation: blinkCursor 0.85s step-end infinite;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ============================================
+   VIEW RESUME CTA
+============================================ */
+.resumeCTA {
+  background: transparent;
+  border: 1.5px solid rgba(253, 141, 103, 0.5);
+  color: var(--accent);
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-inter);
+}
+
+.resumeCTA:hover {
+  background: rgba(253, 141, 103, 0.12);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(253, 141, 103, 0.25);
+}
+
+.resumeCTA:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   MARQUEE STRIP
+============================================ */
+.marqueeWrapper {
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin: 0 0 5rem 0;
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(10px);
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 0;
+  white-space: nowrap;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+
+.marqueeWrapper:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-outfit);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 2rem;
+  transition: color 0.2s ease;
+  cursor: default;
+}
+
+.marqueeItem:hover {
+  color: var(--accent);
+}
+
+.marqueeDot {
+  margin-left: 2rem;
+  font-size: 0.6rem;
+  color: var(--accent);
+  opacity: 0.5;
+}
+
+/* ============================================
+   HOME PAGE: HORIZONTAL 2-COLUMN PROJECT GRID
+============================================ */
+.projectGridHorizontal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .projectGridHorizontal {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Override card dimensions for the horizontal grid */
+.projectGridHorizontal .projectCard {
+  flex-direction: column;
+  height: auto;
+  max-width: 100%;
+}
+
+.projectGridHorizontal .projectPreview {
+  flex: none;
+  height: 220px;
+  width: 100%;
+}
+
+.projectGridHorizontal .projectInfo {
+  padding: 1.75rem;
+}
+
+.projectGridHorizontal .projectTitle {
+  font-size: 1.4rem;
+}
+
+/* Mobile CTA adjustments */
+@media (max-width: 768px) {
+  .heroCTA {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryCTA,
+  .secondaryCTA,
+  .resumeCTA {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .marqueeWrapper {
+    margin-bottom: 3rem;
+  }
 }

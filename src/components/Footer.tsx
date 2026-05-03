@@ -29,7 +29,7 @@ const Footer = () => {
             {/* Social Links */}
             <div className={styles.socials}>
               <a
-                href="www.linkedin.com/in/kulkarni-arya"
+                href="https://www.linkedin.com/in/kulkarni-arya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.link}
@@ -65,7 +65,7 @@ const Footer = () => {
         )}
 
         <div className={styles.copyright}>
-          © {new Date().getFullYear()} Arya Kulkani. All Rights Reserved.
+          © {new Date().getFullYear()} Arya Kulkarni. All Rights Reserved.
         </div>
       </div>
     </footer>
