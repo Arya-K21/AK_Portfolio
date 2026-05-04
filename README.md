@@ -30,7 +30,7 @@ If you want to clone this and poke around the code, it's pretty straightforward.
 
 ## A quick note
 
-Feel free to look through the code and draw inspiration from the design or the animations. Just please don't straight-up fork the entire portfolio and change the name to yours! 
+Feel free to look through the code and draw inspiration from the design or the animations.
 
 Cheers,
 Arya
