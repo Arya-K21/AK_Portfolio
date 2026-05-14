@@ -1,0 +1,554 @@
+/* design-gallery.module.css */
+
+/* ── Page Shell ────────────────────────── */
+.pageContainer {
+    min-height: 100vh;
+    padding-top: 6rem; /* clear navbar */
+    padding-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Folder Grid Section ──────────────── */
+.gridSection {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pageHeader {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.backBtn {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-secondary);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-family: var(--font-outfit);
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: all 0.25s ease;
+}
+
+.backBtn:hover {
+    background: rgba(255,255,255,0.12);
+    color: var(--text-primary);
+    transform: translateX(-2px);
+}
+
+.pageLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    font-family: var(--font-outfit);
+    font-weight: 600;
+}
+
+.pageSubtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    opacity: 0.65;
+}
+
+/* ── Folder Grid ──────────────────────── */
+.folderGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    width: 100%;
+}
+
+/* ── Folder Card ──────────────────────── */
+.folderCard {
+    position: relative;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 1.4rem 1.5rem 1.25rem;
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;
+    transition:
+        transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+        border-color 0.3s ease,
+        box-shadow 0.4s ease,
+        background 0.3s ease;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.folderCard:hover {
+    transform: translateY(-6px);
+    border-color: var(--folder-accent);
+    background: rgba(255,255,255,0.07);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.4),
+        0 0 30px color-mix(in srgb, var(--folder-accent) 20%, transparent);
+}
+
+.folderOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+.folderCard:hover .folderOverlay {
+    opacity: 1;
+}
+
+.folderGlowBar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--folder-accent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.folderCard:hover .folderGlowBar { opacity: 1; }
+
+.folderTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.folderIcon { font-size: 1.6rem; line-height: 1; }
+
+.folderCount {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    font-family: var(--font-outfit);
+    background: rgba(255,255,255,0.07);
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.folderName {
+    font-size: 1.25rem;
+    font-family: var(--font-outfit);
+    color: var(--text-primary);
+    margin: 0 0 0.35rem;
+    font-weight: 600;
+}
+
+.folderDesc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin: 0 0 1rem;
+    line-height: 1.45;
+}
+
+/* Preview strip */
+.previewStrip {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.previewThumb {
+    position: relative;
+    width: 70px;
+    height: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    flex-shrink: 0;
+}
+
+.folderArrow {
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: var(--font-outfit);
+    color: var(--folder-accent);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.folderCard:hover .folderArrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ── Open Folder Section ──────────────── */
+.folderViewSection {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.breadcrumbBack {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-secondary);
+    padding: 0.45rem 1rem;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-family: var(--font-outfit);
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.breadcrumbBack:hover {
+    background: rgba(255,255,255,0.12);
+    color: var(--text-primary);
+    transform: translateX(-2px);
+}
+
+.breadcrumbSep { color: rgba(255,255,255,0.2); }
+
+.breadcrumbCurrent {
+    font-size: 0.9rem;
+    font-family: var(--font-outfit);
+    font-weight: 600;
+}
+
+/* ── Image Grid ───────────────────────── */
+.imageGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1rem;
+}
+
+/* ── Design Card ──────────────────────── */
+.designCard {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 14px;
+    overflow: hidden;
+    transition:
+        transform 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+        box-shadow 0.35s ease;
+}
+
+.designCard:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.5),
+        0 0 20px color-mix(in srgb, var(--folder-accent) 25%, transparent);
+}
+
+.designImageWrap {
+    position: relative;
+    width: 100%;
+    /* removed aspect-ratio to let image show fully */
+    background: rgba(255,255,255,0.05);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.cardImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.designOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    opacity: 0;
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+    border-radius: 14px;
+}
+
+.overlayAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-family: var(--font-outfit);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 60%;
+    min-width: 140px;
+}
+
+.overlayAction:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.05);
+}
+
+.designCard:hover .designOverlay { opacity: 1; }
+
+.designTitle {
+    margin: 0.55rem 0 0;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-family: var(--font-outfit);
+    padding: 0 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Empty State ──────────────────────── */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 5rem 2rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.emptyState span { font-size: 3rem; }
+
+.emptyState p { font-size: 0.9rem; line-height: 1.6; }
+
+.emptyState code {
+    background: rgba(255,255,255,0.07);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+/* ── Responsive ───────────────────────── */
+@media (max-width: 768px) {
+    .folderGrid { grid-template-columns: 1fr; }
+    .imageGrid { grid-template-columns: repeat(2, 1fr); }
+    .gridSection, .folderViewSection { padding: 0 1.25rem; }
+}
+
+@media (max-width: 480px) {
+    .imageGrid { grid-template-columns: 1fr; }
+}
+
+/* ── Lightbox ─────────────────────────── */
+.lightboxBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    cursor: pointer;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightboxPanel {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    cursor: default;
+    animation: slideUp 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.lightboxClose {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.lightboxClose:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.lightboxImageWrap {
+    flex: 1;
+    overflow-y: auto; /* Allow scrolling if image is taller than screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    min-height: 200px; /* Give some minimum height for short images */
+    gap: 1.5rem;
+}
+
+/* Hide scrollbar for cleaner look but keep functionality */
+.lightboxImageWrap::-webkit-scrollbar {
+    width: 6px;
+}
+.lightboxImageWrap::-webkit-scrollbar-track {
+    background: transparent;
+}
+.lightboxImageWrap::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.lightboxImage {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+.lightboxNoImage {
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-family: var(--font-outfit);
+}
+
+.noImagePlaceholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--folder-accent) 70%, transparent), rgba(0,0,0,0.4));
+    color: #fff;
+    font-size: 1.1rem;
+    font-family: var(--font-outfit);
+    font-weight: 600;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 14px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+}
+
+.lightboxFooter {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 1rem;
+}
+
+.lightboxTitle {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: var(--font-outfit);
+    color: var(--text-primary);
+}
+
+.lightboxDriveBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--folder-accent, rgba(255, 255, 255, 0.1));
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: var(--font-outfit);
+    font-weight: 500;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.lightboxDriveBtn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.2);
+}
+
+@media (max-width: 768px) {
+    .lightboxPanel {
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        border: none;
+    }
+    
+    .lightboxBackdrop {
+        padding: 0;
+    }
+    
+    .lightboxClose {
+        top: 0.5rem;
+        right: 0.5rem;
+        background: rgba(0, 0, 0, 0.5);
+    }
+}

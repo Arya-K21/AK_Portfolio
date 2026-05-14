@@ -25,6 +25,18 @@ export const projects: Project[] = [
 
     // ── DESIGN ──────────────────────────────────────────────────────────────
     {
+        id: "0",
+        slug: "design-gallery",
+        title: "Design Gallery",
+        description: "A curated collection of posters, thumbnails, social media graphics, and event designs — organised into folders for easy browsing.",
+        year: "2025",
+        role: "2025 · Graphic Design · Visual Communication",
+        gradient: "linear-gradient(135deg, #2d1b69 0%, #11998e 100%)",
+        categories: ["Graphic Design", "Visual Design", "Branding"],
+        techStack: ["Figma", "Adobe CC", "Canva"],
+        domain: "Design"
+    },
+    {
         id: "1",
         slug: "musikko",
         title: "Musikko",
