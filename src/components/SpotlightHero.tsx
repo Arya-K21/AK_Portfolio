@@ -3,7 +3,7 @@ import styles from "../app/page.module.css";
 import { motion } from "framer-motion";
 import TypewriterText from "./TypewriterText";
 
-const RESUME_URL = "https://drive.google.com/file/d/1Dsz5Jlh3Wthwmi3_zbCR9blAGzNdQU_r/view?usp=drive_link";
+const RESUME_URL = "https://drive.google.com/file/d/11GLyV4PqeEf3y0xFRST2LUtoOn3zHFmh/view?usp=drive_link";
 
 export default function SpotlightHero() {
   return (

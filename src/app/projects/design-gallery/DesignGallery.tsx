@@ -7,13 +7,13 @@ import { designFolders, DesignFolder, DesignItem } from "../designData";
 import styles from "./design-gallery.module.css";
 
 /* ─── Helper: Get Image URLs ───────────────────────────────── */
-function getDisplayImages(item: DesignItem): string[] {
+function getDisplayImages(item: DesignItem, size: number = 800): string[] {
     if (item.images && item.images.length > 0) return item.images;
     if (item.imagePath) return [item.imagePath];
     if (item.driveLink && item.driveLink.includes("drive.google.com")) {
         const match = item.driveLink.match(/\/d\/([a-zA-Z0-9_-]+)/) || item.driveLink.match(/id=([a-zA-Z0-9_-]+)/);
         if (match && match[1]) {
-            return [`https://drive.google.com/thumbnail?id=${match[1]}&sz=w1000`];
+            return [`https://drive.google.com/thumbnail?id=${match[1]}&sz=w${size}`];
         }
     }
     return [];
@@ -43,14 +43,16 @@ function Lightbox({
                 <button className={styles.lightboxClose} onClick={onClose} aria-label="Close">✕</button>
 
                 {/* Images — vertically stacked for multi-slide carousels */}
-                {getDisplayImages(item).length > 0 ? (
+                {getDisplayImages(item, 1200).length > 0 ? (
                     <div className={styles.lightboxImageWrap}>
-                        {getDisplayImages(item).map((imgUrl, idx) => (
+                        {getDisplayImages(item, 1200).map((imgUrl, idx) => (
                             <img
                                 key={idx}
                                 src={imgUrl}
                                 alt={`${item.title} - Slide ${idx + 1}`}
                                 className={styles.lightboxImage}
+                                loading="lazy"
+                                decoding="async"
                             />
                         ))}
                     </div>
@@ -115,17 +117,19 @@ function FolderGrid({ onSelect }: { onSelect: (id: string) => void }) {
                         <p className={styles.folderDesc}>{folder.description}</p>
 
                         {/* Only show preview thumbs for items that have an image */}
-                        {folder.items.filter((i) => getDisplayImages(i).length > 0).length > 0 && (
+                        {folder.items.filter((i) => getDisplayImages(i, 200).length > 0).length > 0 && (
                             <div className={styles.previewStrip}>
                                 {folder.items
-                                    .filter((i) => getDisplayImages(i).length > 0)
+                                    .filter((i) => getDisplayImages(i, 200).length > 0)
                                     .slice(0, 3)
                                     .map((item) => (
                                         <div key={item.id} className={styles.previewThumb}>
                                             <img
-                                                src={getDisplayImages(item)[0]}
+                                                src={getDisplayImages(item, 200)[0]}
                                                 alt={item.title}
                                                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                                loading="lazy"
+                                                decoding="async"
                                             />
                                         </div>
                                     ))}
@@ -203,11 +207,13 @@ function DesignCard({
             style={{ "--folder-accent": accentColor } as React.CSSProperties}
         >
             <div className={styles.designImageWrap}>
-                {getDisplayImages(item).length > 0 ? (
+                {getDisplayImages(item, 600).length > 0 ? (
                     <img
-                        src={getDisplayImages(item)[0]}
+                        src={getDisplayImages(item, 600)[0]}
                         alt={item.title}
                         className={styles.cardImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                 ) : (
                     <div className={styles.noImagePlaceholder}>

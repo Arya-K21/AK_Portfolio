@@ -26,6 +26,7 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+  will-change: transform;
   
   /* Smaller Board Dimensions */
   width: 90%;
@@ -70,6 +71,8 @@
   border-radius: 32px;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+  transform: translateZ(0);
+  will-change: transform;
   box-shadow: 
     0 40px 80px -20px rgba(0,0,0,0.5),
     0 0 0 1px rgba(255,255,255,0.02) inset;
@@ -546,6 +549,7 @@
   justify-content: flex-start; /* Push text to top of info section */
   background: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(20px);
+  transform: translateZ(0);
   text-align: left;
 }
 
@@ -670,6 +674,8 @@
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  transform: translateY(-50%) translateZ(0);
+  will-change: opacity, transform;
   
   z-index: 5;
   pointer-events: none;
@@ -750,6 +756,8 @@
   
   /* Subtle float animation - slower, more elegant */
   animation: float 8s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @keyframes float {

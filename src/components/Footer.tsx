@@ -65,7 +65,7 @@ const Footer = () => {
         )}
 
         <div className={styles.copyright}>
-          © {new Date().getFullYear()} Arya Kulkarni. All Rights Reserved.
+          © {new Date().getFullYear()} Arya Kulkarni.
         </div>
       </div>
     </footer>

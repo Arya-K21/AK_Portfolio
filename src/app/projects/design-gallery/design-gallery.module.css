@@ -89,9 +89,8 @@
         transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
         border-color 0.3s ease,
         box-shadow 0.4s ease,
-        background 0.3s ease;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background 0.3s ease;
+    transform: translateZ(0);
 }
 
 .folderCard:hover {
@@ -111,7 +110,6 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    backdrop-filter: blur(4px);
     transition: opacity 0.3s ease;
     border-radius: 20px;
     z-index: 10;
@@ -260,6 +258,7 @@
     transition:
         transform 0.35s cubic-bezier(0.19, 1, 0.22, 1),
         box-shadow 0.35s ease;
+    transform: translateZ(0);
 }
 
 .designCard:hover {
@@ -294,7 +293,6 @@
     justify-content: center;
     gap: 0.8rem;
     opacity: 0;
-    backdrop-filter: blur(4px);
     transition: opacity 0.3s ease;
     border-radius: 14px;
 }

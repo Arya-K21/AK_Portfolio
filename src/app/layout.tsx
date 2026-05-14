@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: "Arya Kulkarni | UI/UX Designer & Frontend Developer",
     description:
       "CS student from Pune building intuitive, premium digital products. Check out my design and development work.",
-    url: "https://arya-portfolio.vercel.app", // 🔧 Update with your actual Vercel URL after deployment
+    url: "https://arya-kulkarni-portfolio.vercel.app/", // 🔧 Update with your actual Vercel URL after deployment
     siteName: "Arya Kulkarni Portfolio",
     locale: "en_IN",
     type: "website",
